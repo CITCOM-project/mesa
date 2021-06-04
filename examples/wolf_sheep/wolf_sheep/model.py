@@ -87,8 +87,9 @@ class WolfSheep(Model):
         self.grid = MultiGrid(self.height, self.width, torus=True)
         self.datacollector = DataCollector(
             {
-                "Wolves": lambda m: m.schedule.get_breed_count(Wolf),
-                "Sheep": lambda m: m.schedule.get_breed_count(Sheep),
+                "Wolves": lambda m: m.get_wolf_count(),
+                "Sheep": lambda m: m.get_sheep_count(),
+                "Grass": lambda m: m.get_grass_count(),
             }
         )
 
@@ -140,6 +141,18 @@ class WolfSheep(Model):
                     self.schedule.get_breed_count(Sheep),
                 ]
             )
+
+    def get_grass_count(self):
+        return len(list(filter(lambda g: g.fully_grown, self.schedule.agents_by_breed[GrassPatch].values())))
+
+    def get_sheep_count(self):
+        return self.schedule.get_breed_count(Sheep)
+
+    def get_wolf_count(self):
+        return self.schedule.get_breed_count(Wolf)
+    
+    def get_counts(self):
+        return (self.get_grass_count(), self.get_sheep_count(), self.get_wolf_count())
 
     def run_model(self, step_count=200):
 

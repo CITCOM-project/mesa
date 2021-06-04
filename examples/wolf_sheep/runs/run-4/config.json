@@ -1,0 +1,12 @@
+{
+  "height": 20,
+  "width": 20,
+  "initial_sheep": 77,
+  "initial_wolves": 24,
+  "sheep_reproduce": 0.9055261020669623,
+  "wolf_reproduce": 0.19534912149047734,
+  "wolf_gain_from_food": 32,
+  "grass": true,
+  "grass_regrowth_time": 47,
+  "sheep_gain_from_food": 6
+}

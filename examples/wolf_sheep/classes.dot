@@ -1,0 +1,17 @@
+digraph "classes" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{GrassPatch|countdown\lfully_grown : bool\lpos\l|step()\l}", shape="record"];
+"1" [label="{RandomActivationByBreed|agents_by_breed : defaultdict\lsteps\ltime\l|add(agent)\lget_breed_count(breed_class)\lremove(agent)\lstep(by_breed)\lstep_breed(breed)\l}", shape="record"];
+"2" [label="{RandomWalker|grid : NoneType\lmoore : bool\lmoore : bool\lpos\lx : NoneType\ly : NoneType\l|random_move()\l}", shape="record"];
+"3" [label="{Sheep|energy : NoneType\lenergy : NoneType\l|step()\l}", shape="record"];
+"4" [label="{WalkerAgent|\l|step()\l}", shape="record"];
+"5" [label="{WalkerWorld|agent_count\lgrid : MultiGrid\lheight\lheight : int\lschedule : RandomActivation\lwidth\lwidth : int\l|step()\l}", shape="record"];
+"6" [label="{WalkerWorldViz|elements : list\lmodel\l|}", shape="record"];
+"7" [label="{Wolf|energy : NoneType\lenergy : NoneType\l|step()\l}", shape="record"];
+"8" [label="{WolfSheep|datacollector : DataCollector\ldescription : str\lgrass : bool\lgrass : bool\lgrass_regrowth_time : int\lgrass_regrowth_time : int\lgrid : MultiGrid\lheight : int\lheight : int\linitial_sheep : int\linitial_sheep : int\linitial_wolves : int\linitial_wolves : int\lrunning : bool\lschedule\lsheep_gain_from_food : int\lsheep_gain_from_food : int\lsheep_reproduce : float\lsheep_reproduce : float\lverbose : bool\lwidth : int\lwidth : int\lwolf_gain_from_food : int\lwolf_gain_from_food : int\lwolf_reproduce : float\lwolf_reproduce : float\l|get_counts()\lget_grass_count()\lget_sheep_count()\lget_wolf_count()\lrun_model(step_count)\lstep()\l}", shape="record"];
+"3" -> "2" [arrowhead="empty", arrowtail="none"];
+"4" -> "2" [arrowhead="empty", arrowtail="none"];
+"7" -> "2" [arrowhead="empty", arrowtail="none"];
+"1" -> "8" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="schedule", style="solid"];
+}

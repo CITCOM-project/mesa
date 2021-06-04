@@ -1,0 +1,14 @@
+{
+  "ec": $ec,
+  "rc": $rc,
+  "pc1": $pc1,
+  "rc": $rc,
+  "pc0": $pc0,
+  "ph0": $ph0,
+  "ph1": $ph1,
+  "eh": $eh,
+  "rh": $rh,
+  "pp0": $pp0,
+  "pp1": $pp1,
+  "rp": $rp,
+}
