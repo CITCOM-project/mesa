@@ -1,0 +1,94 @@
+digraph "" {
+	graph [newrank=True,
+		rankdir=LR
+	];
+	subgraph cluster_0 {
+		graph [label=t0,
+			pencolor=transparent
+		];
+		sheepLocations_t0;
+		wolvesLocations_t0;
+		numSheep_t0;
+		numWolves_t0;
+	}
+	subgraph cluster_2 {
+		graph [label=t2,
+			pencolor=black
+		];
+		sheepLocations_t2;
+		wolvesLocations_t2;
+		numSheep_t2;
+		numWolves_t2;
+	}
+	subgraph cluster_1 {
+		graph [label=t1,
+			pencolor=black
+		];
+		sheepLocations_t1;
+		wolvesLocations_t1;
+		numSheep_t1;
+		numWolves_t1;
+	}
+	subgraph cluster_3 {
+		graph [label=t3,
+			pencolor=black
+		];
+		sheepLocations_t3;
+		wolvesLocations_t3;
+		numSheep_t3;
+		numWolves_t3;
+	}
+	subgraph cluster_4 {
+		graph [label=t4,
+			pencolor=black
+		];
+		sheepLocations_t4;
+		wolvesLocations_t4;
+		numSheep_t4;
+		numWolves_t4;
+	}
+	initialSheep -> sheepLocations_t0;
+	sheepLocations_t0 -> numSheep_t0;
+	sheepLocations_t0 -> sheepLocations_t1;
+	sheepLocations_t0 -> wolvesLocations_t1;
+	initialWolves -> wolvesLocations_t0;
+	wolvesLocations_t0 -> sheepLocations_t1;
+	wolvesLocations_t0 -> numWolves_t0;
+	wolvesLocations_t0 -> wolvesLocations_t1;
+	sheepLocations_t1 -> numSheep_t1;
+	sheepLocations_t1 -> sheepLocations_t2;
+	sheepLocations_t1 -> wolvesLocations_t2;
+	sheepReproduce -> sheepLocations_t1;
+	sheepReproduce -> sheepLocations_t2;
+	sheepReproduce -> sheepLocations_t3;
+	sheepReproduce -> sheepLocations_t4;
+	sheepGainFromFood -> sheepLocations_t1;
+	sheepGainFromFood -> sheepLocations_t2;
+	sheepGainFromFood -> sheepLocations_t3;
+	sheepGainFromFood -> sheepLocations_t4;
+	wolvesLocations_t1 -> sheepLocations_t2;
+	wolvesLocations_t1 -> numWolves_t1;
+	wolvesLocations_t1 -> wolvesLocations_t2;
+	wolvesReproduce -> wolvesLocations_t1;
+	wolvesReproduce -> wolvesLocations_t2;
+	wolvesReproduce -> wolvesLocations_t3;
+	wolvesReproduce -> wolvesLocations_t4;
+	wolvesGainFromFood -> wolvesLocations_t1;
+	wolvesGainFromFood -> wolvesLocations_t2;
+	wolvesGainFromFood -> wolvesLocations_t3;
+	wolvesGainFromFood -> wolvesLocations_t4;
+	sheepLocations_t2 -> numSheep_t2;
+	sheepLocations_t2 -> sheepLocations_t3;
+	sheepLocations_t2 -> wolvesLocations_t3;
+	wolvesLocations_t2 -> sheepLocations_t3;
+	wolvesLocations_t2 -> numWolves_t2;
+	wolvesLocations_t2 -> wolvesLocations_t3;
+	sheepLocations_t3 -> numSheep_t3;
+	sheepLocations_t3 -> sheepLocations_t4;
+	sheepLocations_t3 -> wolvesLocations_t4;
+	wolvesLocations_t3 -> sheepLocations_t4;
+	wolvesLocations_t3 -> numWolves_t3;
+	wolvesLocations_t3 -> wolvesLocations_t4;
+	sheepLocations_t4 -> numSheep_t4;
+	wolvesLocations_t4 -> numWolves_t4;
+}

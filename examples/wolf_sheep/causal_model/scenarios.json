@@ -1,0 +1,75 @@
+{
+  "input scenarios": [{
+      "id": "default",
+      "description": "The default starting parameters of the model",
+      "distributions": {
+        "height": 20,
+        "width": 20,
+        "initial_sheep": 100,
+        "initial_wolves": 50,
+        "sheep_reproduce": 0.04,
+        "wolf_reproduce": 0.05,
+        "wolf_gain_from_food": 20,
+        "grass": false,
+        "grass_regrowth_time": 30,
+        "sheep_gain_from_food": 4
+      }
+    } {
+      "id": "drought",
+      "description": "Drought slows the grass regrowth time.",
+      "inputs": "grass_regrowth_time",
+      "distributions": [{
+        "input": "grass_regrowth_time",
+        "type": "normal",
+        "parameters": {
+          "mean": 75,
+          "sigma": 20
+        }
+      }]
+    },
+    {
+      "id": "disease",
+      "description": "Disease wipes out large number of sheep and leaves remaining sheep with reduced fertility",
+      "distributions": [{
+          "input": "sheep_reproduce",
+          "type": "normal",
+          "parameters": {
+            "mean": 0.03,
+            "sigma": 0.005
+          }
+        },
+        {
+          "input": "initial_sheep",
+          "type": "poisson",
+          "parameters": {
+            "lambda": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": "lognormal drought",
+      "description": "Severe logarithmic drought makes it difficult to grow grass",
+      "distributions": [{
+        "input": "grass_regrowth_time",
+        "type": "lognormal",
+        "parameters": {
+          "mean": 5,
+          "sigma": 0.5
+        }
+      }]
+    }
+  ],
+  "output scenarios": [
+    {
+      "id": "sheep explosion",
+      "description": "The number of sheep grows exponentially out of control.",
+      "predicate": "model_numSheep_TimeN__ = 2^model_numSheep_TimeN ????"
+    },
+    {
+      "id": "sheep extinction",
+      "description": "The number of sheep becomes zero.",
+      "predicate": "nodel_numSheep_TimeN = 0"
+    }
+  ]
+}

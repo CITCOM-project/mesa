@@ -1,0 +1,262 @@
+{
+  "inputs": [
+    {
+      "id": "model_sheepGainFromFood",
+      "description": "The amount of energy a sheep gains from eating a grass.",
+      "domain": "float+",
+      "direct": true
+    },
+    {
+      "id": "model_wolfGainFromFood",
+      "description": "The amount of energy a wolf gains from eating a sheep.",
+      "domain": "float+",
+      "direct": true
+    },
+    {
+      "id": "sheepInCell",
+      "description": "Whether or not a sheep is in a given cell.",
+      "domain": "boolean",
+      "direct": false
+    },
+    {
+      "id": "wolfInCell",
+      "description": "Whether or not a wolf is in a given cell.",
+      "domain": "boolean",
+      "direct": false
+    },
+    {
+      "id": "model_height",
+      "description": "The height of the model.",
+      "domain": "nat",
+      "direct": true
+    },
+    {
+      "id": "model_width",
+      "description": "The width of the model.",
+      "domain": "nat",
+      "direct": true
+    },
+    {
+      "id": "model_initialSheep",
+      "description": "The number of sheep initially in the grid.",
+      "domain": "nat",
+      "direct": true
+    },
+    {
+      "id": "model_initialWolves",
+      "description": "The number of wolves initially in the grid.",
+      "domain": "nat",
+      "direct": true
+    },
+    {
+      "id": "model_sheepReproduce",
+      "description": "The probability that each sheep will reproduce each generation.",
+      "domain": "range(0, 1)",
+      "direct": true
+    },
+    {
+      "id": "model_wolfReproduce",
+      "description": "The probability that each wolf will reproduce each generation.",
+      "domain": "range(0, 1)",
+      "direct": true
+    },
+    {
+      "id": "model_grass",
+      "description": "Whether sheep require grass to live.",
+      "domain": "boolean",
+      "direct": true
+    },
+    {
+      "id": "model_grassRegrowthTime",
+      "description": "The number of time steps taken for grass to regrow once eaten by a sheep.",
+      "domain": "nat",
+      "direct": true
+    },
+    {
+      "id": "model_stepCount",
+      "description": "The number of time steps to run the model for.",
+      "domain": "nat",
+      "direct": true
+    },
+    {
+      "id": "sheep_energy_TimeN",
+      "description": "The amount of energy a given sheep has at time N.",
+      "domain": "float+",
+      "direct": false
+    },
+    {
+      "id": "sheep_living_TimeN",
+      "description": "Whether a given sheep is alive right now. This maintains the presence of a sheep in a cell such that a wolf can eat it if it's in the same cell in the same generation. No such variable needs to exist for wolves since nothing eats them. They can simply be removed from the model when they die.",
+      "domain": "boolean",
+      "direct": false
+    },
+    {
+      "id": "wolf_energy_TimeN",
+      "description": "The amount of energy a given wolf has at time N.",
+      "domain": "float+",
+      "direct": false
+    }
+  ],
+  "outputs": [
+    {
+      "id": "model_sheepExplosion",
+      "description": "Whether or not the number of sheep grows exponentially out of control.",
+      "domain": "boolean",
+      "direct": false,
+      "emergent": true,
+      "scenario": true,
+      "monotonic": true
+    },
+    {
+      "id": "model_grassExtinction",
+      "description": "Whether the grass goes extinct.",
+      "domain": "boolean",
+      "direct": false,
+      "emergent": true,
+      "scenario": true,
+      "monotonic": false
+    },
+    {
+      "id": "model_sheepExtinction",
+      "description": "Whether the sheep go extinct.",
+      "domain": "boolean",
+      "direct": false,
+      "emergent": true,
+      "scenario": true,
+      "monotonic": true
+    },
+    {
+      "id": "model_wolfExplosion",
+      "description": "Whether or not the number of wolves grows exponentially out of control.",
+      "domain": "boolean",
+      "direct": false,
+      "emergent": true,
+      "scenario": true,
+      "monotonic": true
+    },
+    {
+      "id": "model_grassExplosion",
+      "description": "Whether or not the grass eventually fills the grid.",
+      "domain": "boolean",
+      "direct": false,
+      "emergent": true,
+      "scenario": true,
+      "monotonic": "true, I think. The sheep will eat grass in any cell where it's fully grown, so if there's a sheep, the grass can never fill the grid. If we're more relax our definition of 'explosion' to filling X% of the grid (where X -> 100) then it may fluctuate"
+    },
+    {
+      "id": "model_wolfExtinction",
+      "description": "Whether the wolves go extinct.",
+      "domain": "boolean",
+      "direct": false,
+      "emergent": true,
+      "scenario": true,
+      "monotonic": true
+    },
+    {
+      "id": "model_numSheep_TimeN",
+      "description": "The number of sheep at time N.",
+      "domain": "nat",
+      "direct": true,
+      "scenario": false
+    },
+    {
+      "id": "model_numSheep_TimeN__",
+      "description": "The number of sheep at time N+1.",
+      "domain": "nat",
+      "direct": true,
+      "emergent": true,
+      "scenario": false
+    },
+    {
+      "id": "grass_fullyGrown_TimeN",
+      "description": "Whether the grass in a given cell is fully grown and can be eaten.",
+      "domain": "boolean",
+      "direct": "kind of - you can see it on the GUI but not in the terminal run.",
+      "emergent": false,
+      "scenario": false
+    },
+    {
+      "id": "model_numWolves_TimeN",
+      "description": "The number of wolves at time N.",
+      "domain": "nat",
+      "direct": false,
+      "emergent": true
+    },
+    {
+      "id": "model_numWolves_TimeN__",
+      "description": "The number of wolves at time N+1.",
+      "domain": "nat",
+      "direct": false,
+      "emergent": true
+    },
+    {
+      "id": "model_numGrass_TimeN",
+      "description": "The number of cells in which the grass is fully grown at time N.",
+      "domain": "nat",
+      "direct": false,
+      "emergent": true
+    },
+    {
+      "id": "model_numGrass_TimeN__",
+      "description": "The number of cells in which the grass is fully grown at time N+1.",
+      "domain": "nat",
+      "direct": false,
+      "emergent": true
+    },
+    {
+      "id": "sheep_energy_TimeN__",
+      "description": "The amount of energy a sheep has at time N+1.",
+      "domain": "float+",
+      "direct": false
+    },
+    {
+      "id": "wolf_energy_TimeN__",
+      "description": "The amount of energy a wolf has at time N+1.",
+      "domain": "float+",
+      "direct": false
+    },
+    {
+      "id": "grass_fullyGrown_TimeN__",
+      "description": "Whether the grass in a given cell is fully grown at time N+1.",
+      "domain": "boolean",
+      "direct": false,
+      "emergent": false
+    },
+    {
+      "id": "sheep_living_TimeN__",
+      "description": "Whether a given sheep is alive at time N+1.",
+      "domain": "boolean",
+      "direct": false
+    },
+    {
+      "id": "grass_countdown_TimeN",
+      "description": "The number of time steps from time N until a given grass is fullyGrown.",
+      "domain": "nat",
+      "direct": false
+    },
+    {
+      "id": "grass_countdown_TimeN__",
+      "description": "The number of time steps from from N+1 until a given grass is fullyGrown.",
+      "domain": "nat",
+      "direct": false
+    },
+    {
+      "id": "sheep_birth_TimeN",
+      "description": "Whether a given sheep gives birth at time N.",
+      "domain": "boolean",
+      "direct": false
+    },
+    {
+      "id": "wolf_living_TimeN__",
+      "description": "Whether a given wolf is alive at time N.",
+      "domain": "boolean",
+      "direct": false
+    },
+    {
+      "id": "wolf_birth_TimeN",
+      "description": "Whether a given wolf gives birth at time N.",
+      "domain": "boolean",
+      "direct": false
+    }
+  ]
+}

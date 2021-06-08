@@ -1,0 +1,8 @@
+strict digraph "" {
+	model_numSheepTimeN -> model_numSheepTimeN__;
+	wolfInCell -> sheep_living__;
+	sheep_living__ -> model_numSheepTimeN__;
+	model_initialSheep -> model_numSheepTimeN;
+	model_grassRegrowthTime -> model_numSheepTimeN;
+	sheep_energy -> sheep_living__;
+}

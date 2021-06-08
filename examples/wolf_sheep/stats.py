@@ -19,8 +19,8 @@ counts = {
     'end_grass': []
     }
 
-fig, [grassPlot, sheepPlot, wolvesPlot, run1] = plt.subplots(nrows=4, ncols=1, figsize=(8, 16))
-    
+fig, axs = plt.subplots(nrows=4, ncols=1, figsize=(8, 16))
+[grassPlot, sheepPlot, wolvesPlot, run1] = axs
 
 for d in os.listdir("runs"):
     runinfo = pd.read_csv(f"runs/{d}/results.csv")
@@ -33,13 +33,23 @@ for d in os.listdir("runs"):
     sheepPlot.plot(range(len(sheep)), sheep, color="blue")
     wolvesPlot.plot(range(len(wolves)), wolves, color="gray")
     
+    grassPlot.set_title("Grass")
+    sheepPlot.set_title("Sheep")
+    wolvesPlot.set_title("Wolves")
+    run1.set_title("Example run")
+    
+    for ax in axs:
+        ax.set_xlabel("Time step")
+        ax.set_ylabel("Number of individuals")
+    
     if runinfo.iloc[-1]['Wolves'] > 1000:
         print(d)
         print(runinfo.iloc[-1])
         if d == "run-9":
-            run1.plot(range(len(grass)), grass, color="green")
-            run1.plot(range(len(sheep)), sheep, color="blue")
-            run1.plot(range(len(wolves)), wolves, color="gray")
+            run1.plot(range(len(grass)), grass, color="green", label="Grass")
+            run1.plot(range(len(sheep)), sheep, color="blue", label="Sheep")
+            run1.plot(range(len(wolves)), wolves, color="gray", label="Wolves")
+    run1.legend()
     
     counts['start_wolves'].append(runinfo.iloc[0]['Wolves'])
     counts['end_wolves'].append(runinfo.iloc[-1]['Wolves'])
@@ -59,4 +69,7 @@ for k in counts:
             prev = v
     counts[k] = newcounts
         
-    print(k, counts[k])    
+    print(k, counts[k])
+
+plt.tight_layout()
+plt.savefig("stats.svg")

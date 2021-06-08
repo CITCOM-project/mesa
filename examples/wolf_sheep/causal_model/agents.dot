@@ -4,8 +4,8 @@ digraph agents {
 
   {rank = same; model_sheepExplosion; model_wolfExplosion; model_grassExplosion;}
   {rank = same; model_sheepExtinction; model_wolfExtinction; model_grassExtinction;}
-  {rank = same; model_sheepTimeN; model_wolvesTimeN; model_grassTimeN;}
-  {rank = same; model_sheepTimeN__; model_wolvesTimeN__; model_grassTimeN__;}
+  {rank = same; model_numSheepTimeN; model_numWolvesTimeN; model_numGrassTimeN;}
+  {rank = same; model_numSheepTimeN__; model_numWolvesTimeN__; model_numGrassTimeN__;}
   {rank = same; model_sheepGainFromFood; model_wolfGainFromFood;}
 
   subgraph cluster_cell {
@@ -31,9 +31,9 @@ digraph agents {
     model_stepCount;
 
     /* True model output parameters */
-    model_sheepTimeN -> model_sheepTimeN__;
-    model_wolvesTimeN -> model_wolvesTimeN__;
-    model_grassTimeN -> model_grassTimeN__;
+    model_numSheepTimeN -> model_numSheepTimeN__;
+    model_numWolvesTimeN -> model_numWolvesTimeN__;
+    model_numGrassTimeN -> model_numGrassTimeN__;
 
     /* Abstract variables */
     model_sheepExplosion;
@@ -44,9 +44,9 @@ digraph agents {
     model_grassExtinction;
 
     /* Initial agents to time specific */
-    model_initialSheep -> model_sheepTimeN;
-    model_initialWolves -> model_wolvesTimeN;
-    model_grass -> model_grassTimeN;
+    model_initialSheep -> model_numSheepTimeN;
+    model_initialWolves -> model_numWolvesTimeN;
+    model_grass -> model_numGrassTimeN;
 
     /* Scenarios */
     /* Sheep Extinction */
@@ -86,7 +86,7 @@ digraph agents {
     /* Wolf Explosion */
     model_height -> model_wolfExplosion;
     model_width -> model_wolfExplosion;
-    model_grassRegrowthTime -> model_sheepTimeN;
+    model_grassRegrowthTime -> model_numSheepTimeN;
     model_grass -> model_wolfExplosion;
     model_initialSheep -> model_wolfExplosion;
     model_initialWolves -> model_wolfExplosion;
@@ -99,7 +99,7 @@ digraph agents {
     /* Grass extinction */
     model_height -> model_grassExtinction;
     model_width -> model_grassExtinction;
-    model_sheepTimeN -> model_grassExtinction;
+    model_numSheepTimeN -> model_grassExtinction;
     model_grass -> model_grassExtinction;
     model_grassRegrowthTime -> model_grassExtinction;
     model_stepCount -> model_grassExtinction;
@@ -121,9 +121,9 @@ digraph agents {
     sheepInCell -> grass_fullyGrown__;
 
     /* Fully grown */
-    model_sheepTimeN -> grass_fullyGrown;
+    model_numSheepTimeN -> grass_fullyGrown;
     grass_fullyGrown -> grass_fullyGrown__;
-    grass_fullyGrown -> model_grassTimeN;
+    grass_fullyGrown -> model_numGrassTimeN;
 
     /* Growing */
     grass_countdown -> grass_fullyGrown;
@@ -146,7 +146,7 @@ digraph agents {
     /* Death */
     sheep_energy -> sheep_living__;
     wolfInCell -> sheep_living__;
-    sheep_living__ -> model_sheepTimeN__;
+    sheep_living__ -> model_numSheepTimeN__;
 
     /* Reproduction */
     sheep_living -> sheep_birth;
@@ -164,7 +164,7 @@ digraph agents {
 
     /* Death */
     wolf_energy -> wolf_living__;
-    wolf_living__ -> model_wolvesTimeN__;
+    wolf_living__ -> model_numWolvesTimeN__;
 
     /* Reproduction */
     wolf_energy -> wolf_birth;
