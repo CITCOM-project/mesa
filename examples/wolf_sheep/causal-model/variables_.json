@@ -1,0 +1,240 @@
+{
+  "inputs": [
+    {
+      "id": "model_sheepGainFromFood",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_wolfGainFromFood",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "sheepInCell",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "wolfInCell",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_height",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_width",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_initialSheep",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_initialWolves",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_sheepReproduce",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_wolfReproduce",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_grass",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_grassRegrowthTime",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_stepCount",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "sheep_energy",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "sheep_living",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "RANDOM",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "wolf_energy",
+      "description": "",
+      "domain": "",
+      "direct": false
+    }
+  ],
+  "outputs": [
+    {
+      "id": "model_sheepExplosion",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_grassExtinction",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_sheepExtinction",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_wolfExplosion",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_grassExplosion",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_wolfExtinction",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_numSheepTimeN",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_numSheepTimeN__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "grass_fullyGrown",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_numWolvesTimeN",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_numWolvesTimeN__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_numGrassTimeN",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "model_numGrassTimeN__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "sheep_energy__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "wolf_energy__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "grass_fullyGrown__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "sheep_living__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "grass_countdown",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "grass_countdown__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "sheep_birth",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "wolf_living__",
+      "description": "",
+      "domain": "",
+      "direct": false
+    },
+    {
+      "id": "wolf_birth",
+      "description": "",
+      "domain": "",
+      "direct": false
+    }
+  ]
+}

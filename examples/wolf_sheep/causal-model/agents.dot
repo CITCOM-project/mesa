@@ -1,0 +1,173 @@
+digraph agents {
+  rankdir = "LR";
+  newrank = "true";
+
+  {rank = same; model_sheepExplosion; model_wolfExplosion; model_grassExplosion;}
+  {rank = same; model_sheepExtinction; model_wolfExtinction; model_grassExtinction;}
+  {rank = same; model_numSheepTimeN; model_numWolvesTimeN; model_numGrassTimeN;}
+  {rank = same; model_numSheepTimeN__; model_numWolvesTimeN__; model_numGrassTimeN__;}
+  {rank = same; model_sheepGainFromFood; model_wolfGainFromFood;}
+
+  subgraph cluster_cell {
+    label = "Cell"
+    {rank = same; sheepInCell; wolfInCell;}
+
+    sheepInCell;
+    wolfInCell;
+  }
+
+  subgraph cluster_model {
+    /* True model input parameters */
+    model_height;
+    model_width;
+    model_initialSheep;
+    model_initialWolves;
+    model_sheepReproduce;
+    model_wolfReproduce;
+    model_wolfGainFromFood;
+    model_grass;
+    model_grassRegrowthTime;
+    model_sheepGainFromFood;
+    model_stepCount;
+
+    /* True model output parameters */
+    model_numSheepTimeN -> model_numSheepTimeN__;
+    model_numWolvesTimeN -> model_numWolvesTimeN__;
+    model_numGrassTimeN -> model_numGrassTimeN__;
+
+    /* Abstract variables */
+    model_sheepExplosion;
+    model_sheepExtinction;
+    model_wolfExplosion;
+    model_wolfExtinction;
+    model_grassExplosion;
+    model_grassExtinction;
+
+    /* Initial agents to time specific */
+    model_initialSheep -> model_numSheepTimeN;
+    model_initialWolves -> model_numWolvesTimeN;
+    model_grass -> model_numGrassTimeN;
+
+    /* Scenarios */
+    /* Sheep Extinction */
+    model_grass -> model_sheepExplosion;
+    model_width -> model_sheepExplosion;
+    model_height -> model_sheepExplosion;
+    model_grassRegrowthTime -> model_sheepExplosion;
+    model_initialSheep -> model_sheepExplosion;
+    model_initialWolves -> model_sheepExplosion;
+    model_sheepReproduce -> model_sheepExplosion;
+    model_wolfReproduce -> model_sheepExplosion;
+    model_wolfGainFromFood -> model_sheepExplosion;
+    model_stepCount -> model_sheepExplosion;
+
+    /* Sheep Explosion */
+    model_grass -> model_sheepExtinction;
+    model_initialSheep -> model_sheepExtinction;
+    model_initialWolves -> model_sheepExtinction;
+    model_sheepReproduce -> model_sheepExtinction;
+    model_wolfReproduce -> model_sheepExtinction;
+    model_wolfGainFromFood -> model_sheepExtinction;
+    model_stepCount -> model_sheepExtinction;
+
+    /* Wolf Extinction */
+    model_height -> model_wolfExtinction;
+    model_width -> model_wolfExtinction;
+    model_grassRegrowthTime -> model_wolfExtinction;
+    model_grass -> model_wolfExtinction;
+    model_initialSheep -> model_wolfExtinction;
+    model_initialWolves -> model_wolfExtinction;
+    model_wolfReproduce -> model_wolfExtinction;
+    model_wolfGainFromFood -> model_wolfExtinction;
+    model_stepCount -> model_wolfExtinction;
+    /* We need there to be sheep for the wolves to eat */
+    model_sheepExtinction-> model_wolfExtinction;
+
+    /* Wolf Explosion */
+    model_height -> model_wolfExplosion;
+    model_width -> model_wolfExplosion;
+    model_grassRegrowthTime -> model_numSheepTimeN;
+    model_grass -> model_wolfExplosion;
+    model_initialSheep -> model_wolfExplosion;
+    model_initialWolves -> model_wolfExplosion;
+    model_wolfReproduce -> model_wolfExplosion;
+    model_wolfGainFromFood -> model_wolfExplosion;
+    model_stepCount -> model_wolfExplosion;
+    /* We need there to be sheep for the wolves to eat */
+    model_sheepExtinction-> model_wolfExplosion;
+
+    /* Grass extinction */
+    model_height -> model_grassExtinction;
+    model_width -> model_grassExtinction;
+    model_numSheepTimeN -> model_grassExtinction;
+    model_grass -> model_grassExtinction;
+    model_grassRegrowthTime -> model_grassExtinction;
+    model_stepCount -> model_grassExtinction;
+    /* If the sheep go extinct, the grass will grow back */
+    model_sheepExtinction -> model_grassExtinction;
+    /* If the sheep explode, more grass will be eaten */
+    model_sheepExplosion -> model_grassExtinction;
+
+    /* Grass Explosion */
+    model_grass -> model_grassExplosion;
+    /* We need there to be no sheep for the grass to explode */
+    model_sheepExtinction -> model_grassExplosion;
+  }
+
+  subgraph cluster_grass {
+    label = "Grass Agent"
+
+    /* Eaten by sheep */
+    sheepInCell -> grass_fullyGrown__;
+
+    /* Fully grown */
+    model_numSheepTimeN -> grass_fullyGrown;
+    grass_fullyGrown -> grass_fullyGrown__;
+    grass_fullyGrown -> model_numGrassTimeN;
+
+    /* Growing */
+    grass_countdown -> grass_fullyGrown;
+    grass_countdown -> grass_countdown__;
+    model_grassRegrowthTime -> grass_countdown;
+  }
+
+  subgraph cluster_sheep {
+    label = "Sheep Agent"
+    /* Reduce energy - covered by eating */
+    /* model_grass -> sheep_energy__; */
+
+    /* Eating grass */
+    sheep_energy -> sheep_energy__;
+    model_grass -> sheep_energy__;
+    model_grass -> grass_fullyGrown__;
+    grass_fullyGrown -> sheep_energy__;
+    model_sheepGainFromFood -> sheep_energy__;
+
+    /* Death */
+    sheep_energy -> sheep_living__;
+    wolfInCell -> sheep_living__;
+    sheep_living__ -> model_numSheepTimeN__;
+
+    /* Reproduction */
+    sheep_living -> sheep_birth;
+    RANDOM -> sheep_birth;
+    sheep_birth -> sheep_energy__;
+  }
+
+  subgraph cluster_wolf {
+    label = "Wolf Agent"
+
+    /* Eating sheep */
+    wolf_energy -> wolf_energy__;
+    sheepInCell -> wolf_energy__;
+    model_wolfGainFromFood -> wolf_energy__;
+
+    /* Death */
+    wolf_energy -> wolf_living__;
+    wolf_living__ -> model_numWolvesTimeN__;
+
+    /* Reproduction */
+    wolf_energy -> wolf_birth;
+    wolf_birth -> wolf_energy__;
+  }
+}
