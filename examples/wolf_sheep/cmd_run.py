@@ -5,7 +5,7 @@ Created on Thu Jun  3 10:09:48 2021
 
 @author: michael
 """
-from wolf_sheep.model import WolfSheep,GrassPatch
+from wolf_sheep.model import WolfSheep
 
 from random import randint
 from random import random

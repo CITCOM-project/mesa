@@ -90,6 +90,8 @@ class WolfSheep(Model):
                 "Wolves": lambda m: m.get_wolf_count(),
                 "Sheep": lambda m: m.get_sheep_count(),
                 "Grass": lambda m: m.get_grass_count(),
+                "SheepEnergy": lambda m: m.get_sheep_energy(),
+                "WolfEnergy": lambda m: m.get_wolf_energy()
             }
         )
 
@@ -147,6 +149,12 @@ class WolfSheep(Model):
 
     def get_sheep_count(self):
         return self.schedule.get_breed_count(Sheep)
+
+    def get_sheep_energy(self):
+        return sum([x.energy for x in self.schedule.agents_by_breed[Sheep].values()])
+    
+    def get_wolf_energy(self):
+        return sum([x.energy for x in self.schedule.agents_by_breed[Wolf].values()])
 
     def get_wolf_count(self):
         return self.schedule.get_breed_count(Wolf)
