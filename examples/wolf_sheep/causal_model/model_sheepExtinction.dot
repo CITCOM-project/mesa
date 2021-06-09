@@ -1,9 +1,0 @@
-strict digraph "" {
-	model_wolfGainFromFood;
-	model_initialSheep;
-	model_initialWolves;
-	model_sheepReproduce;
-	model_wolfReproduce;
-	model_grass;
-	model_stepCount;
-}
