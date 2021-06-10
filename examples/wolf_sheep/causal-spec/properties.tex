@@ -13,21 +13,52 @@
 \subsection{Two Agent Model}
 \begin{enumerate}
   \item If the wolves go extinct, the sheep population will explode since they no longer have any predators to eat them and they don't starve to death as they would in the three agent model.
-  \item If the conditions are stupidly optimal wolf and sheep population explosion may occur. This happens if the sheep birth rate massively outstrips the rate they're being eaten at. Once there's a ``critical mass'' of sheep the population can explode unchecked by the wolves. As long as the wolf population growth does not outstrip the supply of sheep, both populations continue to spiral upwards. The wolf birth rate needs to be much lower than the sheep one to support this.
+        Formally,
+        $$G(numWolves = 0 \implies G(\exists n. numSheep = n \land G(numSheep \geq n)))$$.
+  \item If the conditions are stupidly optimal, wolf and sheep population explosion may occur. This happens if the sheep birth rate massively outstrips the rate they're being eaten at (which is proportional to the number of wolves). Once there's a ``critical mass'' of sheep the population can explode unchecked by the wolves. As long as the wolf population growth does not outstrip the supply of sheep, both populations continue to spiral upwards. The wolf birth rate needs to be much lower than the sheep one to support this.
+
+        There's not really a way for me to formalise this properly as I'm not a domain expert. The best I can do as this point is phrase the property more simply as ``while the number of sheep grows, so will the number of wolves''.
+        Formally,
+        $$G(\exists s.\, numSheep = s \land X(numSheep \ge s) \implies (\exists w.\, numWolves = w \land X(numWolves \ge w)))$$.
+        We can then formulate a causal graph around this such that the number of sheep is affected by the birth rate and the number of wolves.
   \item Stability is extremely unlikely. Generally either wolves kill all the sheep and you get total extinction or the wolves die off before all the sheep and you get a sheep explosion after.
+        Formally,
+        $$F(numWolves = 0 \land (numSheep = 0 \lor G(\exists n. numSheep = n \land G(numSheep \geq n))))$$
 \end{enumerate}
 
 \subsection{Three Agent Model}
 \begin{enumerate}
   \item Sheep extinction is caused by grass extinction. If the sheep can't find a grass to eat before they run out of energy, they will die. This is affected by grass regrowth time, the number of sheep eating the grass (which is affected between generations by the birth rate), and the amount of energy a sheep gains from eating a grass.
+        Naively, we could formalise this as $F(numGrass = 0) \implies FG(numSheep = 0)$, but this doesn't consider the fact that the grass grows back. Thus, the sheep population could, theoretically, stabilise at a lower level if the grass grows back fast enough and the sheep last that long. The grass also very rarely actually gets to zero.
+
+        Running the model a few more times, the property we're actually interested in here is less about the amount of grass at any one time and more about how fact it regrows. It looks like (and makes sense that) if the grass regrowth rate is more than twice the energy the sheep gain from eating it, the population will eventually go extinct. This is because the grass can't regrow in time for the sheep to eat it. It needs to be twice because the model initially starts off with about half the grass fully grown, I think. The sheep birth rate will probably make a difference here too, but I'm not sure how.
+        Formally,
+        $$grassRegrowthTime > f(2*sheepGainFromFood, sheepBirthRate) \implies F(numSheep = 0)$$.
+        The wolf parameters will bring this about faster, but will not affect whether it happens. Indeed, if there's wolves about, the grass regrowth rate (and/or the sheep energy gain from food) will need to be stacked even more in the sheep's favour.
   \item The sheep population can never spiral out of control. This is caused by the fact that the sheep depend on grass for energy, so die off if there's not enough grass to support the current population.
+        Formally,
+        $$grassRegrowthTime > 0 \implies G(F(\exists s. numSheep = s \land X(numSheep < s)))$$.
+        Obviously if grass regrowth time is zero, this should be equivalent to having grass turned off. Incidentally, there's probably a nice hyperproperty there. Do we want to get into hyperproperties.
 \end{enumerate}
 
 \subsection{Two and Three Agent Model}
 \begin{enumerate}
+  \item Once an (animal) agent has gone extinct, it never comes back again.
+        Formally,
+        $$G(numSheep = 0 \implies G(numSheep = 0))$$
+        and similar for wolves.
   \item Sheep extinction causes eventual wolf extinction, i.e. the wolves cannot survive (long) without the sheep. The time this takes is affected by the number of wolves and the amount of energy they have (which is affected by the amount of energy a wolf gains from food). The wolves can also go extinct without the sheep going extinct if they run out of energy before they find a sheep to eat. This is affected by the number of sheep and their birth rate.
+        Formally,
+        $$F(numSheep = 0) \implies F(G(numWolves = 0))$$.
+        Sheep do not behave like grass in the three agent model in that they do not come back once gone so, once all the sheep have gone, the wolves will all die of starvation eventually.
+\end{enumerate}
+There's also a bunch of interesting hyperproperties here
+\begin{enumerate}
   \item The more AGENT (wolf or sheep) you have, the more AGENT (wolf or sheep) you get in the next generation.
+        Formally,
+        and similar for wolves, where $numSheep'$ is the number of sheep in the next state.
   \item The sheep population is affected by the wolves - more wolves now leads to less sheep in the future.
+        Formally,
   \item If there are wolves and the sheep population increases, the wolf population will also increase.
   \item If the number of wolves outstrips the supply of sheep (i.e. passes the point of equilibrium), the number of sheep will decrease.
   \item If the number of sheep decrease, the wolf population will decrease soon after.

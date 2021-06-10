@@ -73,7 +73,7 @@ def run(
 
 for i in range(100):
     print("RUN", i)
-    rundir = f"run-{i}"
+    rundir = f"run-3-agent-{i}"
     if not os.path.exists(f"runs/{rundir}"):
         os.mkdir(f"runs/{rundir}")
     
@@ -83,7 +83,7 @@ for i in range(100):
         sheep_reproduce=random(),
         wolf_reproduce=random(),
         wolf_gain_from_food=randint(1, 50),
-        grass=choice([True, False]),
+        grass=True,
         grass_regrowth_time=randint(1, 50),
         sheep_gain_from_food=randint(1, 10),
         step_count=300,

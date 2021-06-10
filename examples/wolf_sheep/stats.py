@@ -9,7 +9,6 @@ Created on Thu Jun  3 15:52:29 2021
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-import json
 from math import log
 
 counts = {
@@ -24,11 +23,10 @@ fig, axs = plt.subplots(nrows=5, ncols=1, figsize=(10, 20))
 for d in os.listdir("runs"):
     if d == 'stats':
         continue
-    with open(f"runs/{d}/config.json") as f:
-        config = json.loads("".join(f.readlines()))
-        if config['grass']:
-            continue
-
+    
+    if "2-agent" in d:
+        continue
+    
     runinfo = pd.read_csv(f"runs/{d}/results.csv")
 
     grass = runinfo['Grass']
@@ -36,6 +34,9 @@ for d in os.listdir("runs"):
     wolves = runinfo['Wolves']
     wolfEnergy = [(x) if x > 0 else 0 for x in runinfo['WolfEnergy']]
     sheepEnergy = [(x) if x > 0 else 0 for x in runinfo['SheepEnergy']]
+    
+    if any([x > 700 for x in sheep]):
+        print(d)
     
     grassPlot.plot(range(len(grass)), grass, color="green")
     sheepPlot.plot(range(len(sheep)), sheep, color="blue")
