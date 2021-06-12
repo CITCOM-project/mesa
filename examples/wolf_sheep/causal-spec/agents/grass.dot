@@ -1,0 +1,5 @@
+strict digraph "" {
+	grassGrowing -> grassShrinking	[label="sheep > grass"];
+	grassGrowing -> grassSaturated	[label="grass = 400"];
+	grassShrinking -> grassGrowing	[label="grass > sheep"];
+}

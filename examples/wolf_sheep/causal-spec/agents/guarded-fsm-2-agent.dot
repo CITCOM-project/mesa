@@ -1,0 +1,19 @@
+strict digraph "" {
+	"('sheepFalling', 'wolvesRising')" -> "('sheepExtinct', 'wolvesFalling')"	[label="(sheep = 0) AND (sheep < wolves)"];
+	"('sheepFalling', 'wolvesRising')" -> "('sheepFalling', 'wolvesFalling')"	[label="(sheep < wolves)"];
+	"('sheepFalling', 'wolvesRising')" -> "('sheepRising', 'wolvesFalling')"	[label="((sheep > wolves) AND (grass > sheep)) AND (sheep < wolves)"];
+	"('sheepFalling', 'wolvesRising')" -> "('sheepRising', 'wolvesRising')"	[label="((sheep > wolves) AND (grass > sheep))"];
+	"('sheepExtinct', 'wolvesFalling')" -> "('sheepExtinct', 'wolvesExtinct')"	[label="(wolves = 0)"];
+	"('sheepFalling', 'wolvesFalling')" -> "('sheepFalling', 'wolvesRising')"	[label="(sheep > wolves)"];
+	"('sheepFalling', 'wolvesFalling')" -> "('sheepExtinct', 'wolvesFalling')"	[label="(sheep = 0)"];
+	"('sheepFalling', 'wolvesFalling')" -> "('sheepRising', 'wolvesFalling')"	[label="((sheep > wolves) AND (grass > sheep))"];
+	"('sheepFalling', 'wolvesFalling')" -> "('sheepRising', 'wolvesRising')"	[label="((sheep > wolves) AND (grass > sheep)) AND (sheep > wolves)"];
+	"('sheepFalling', 'wolvesFalling')" -> "('sheepRising', 'wolvesExtinct')"	[label="((sheep > wolves) AND (grass > sheep)) AND (wolves = 0)"];
+	"('sheepRising', 'wolvesFalling')" -> "('sheepFalling', 'wolvesRising')"	[label="((grass < sheep) OR (sheep < wolves)) AND (sheep > wolves)"];
+	"('sheepRising', 'wolvesFalling')" -> "('sheepFalling', 'wolvesFalling')"	[label="((grass < sheep) OR (sheep < wolves))"];
+	"('sheepRising', 'wolvesFalling')" -> "('sheepRising', 'wolvesRising')"	[label="(sheep > wolves)"];
+	"('sheepRising', 'wolvesFalling')" -> "('sheepRising', 'wolvesExtinct')"	[label="(wolves = 0)"];
+	"('sheepRising', 'wolvesRising')" -> "('sheepFalling', 'wolvesRising')"	[label="((grass < sheep) OR (sheep < wolves))"];
+	"('sheepRising', 'wolvesRising')" -> "('sheepFalling', 'wolvesFalling')"	[label="((grass < sheep) OR (sheep < wolves)) AND (sheep < wolves)"];
+	"('sheepRising', 'wolvesRising')" -> "('sheepRising', 'wolvesFalling')"	[label="(sheep < wolves)"];
+}

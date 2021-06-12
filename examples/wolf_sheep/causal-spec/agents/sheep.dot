@@ -1,0 +1,5 @@
+strict digraph "" {
+	sheepGrowing -> sheepShrinking	[label="sheep > grass OR wolves > sheep"];
+	sheepShrinking -> sheepGrowing	[label="grass > sheep OR sheep > wolves"];
+	sheepShrinking -> sheepExtinct	[label="sheep = 0"];
+}
