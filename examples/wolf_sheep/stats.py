@@ -9,7 +9,6 @@ Created on Thu Jun  3 15:52:29 2021
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from math import log
 
 counts = {
     'wolves': [],
@@ -24,7 +23,7 @@ for d in os.listdir("runs"):
     if d == 'stats':
         continue
     
-    if "2-agent" in d:
+    if "300-steps" not in d:
         continue
     
     runinfo = pd.read_csv(f"runs/{d}/results.csv")

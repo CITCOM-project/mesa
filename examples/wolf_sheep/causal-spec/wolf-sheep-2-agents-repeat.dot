@@ -1,0 +1,60 @@
+digraph "" {
+	graph [newrank=True,
+		rankdir=LR
+	];
+	subgraph cluster_0 {
+		graph [label="Initialisation",
+			pencolor=black
+		];
+		subgraph num_0 {
+			graph [rank=same];
+			numSheep_t0[label=<numSheep_t<sub>0</sub>>];
+			sheepReproduce_t0[label=<sheepReproduce_t<sub>0</sub>>];
+			wolvesGainFromFood_t0[label=<wolvesGainFromFood_t<sub>0</sub>>];
+			numWolves_t0[label=<numWolves_t<sub>0</sub>>];
+			wolvesReproduce_t0[label=<wolvesReproduce_t<sub>0</sub>>];
+		}
+	}
+	subgraph cluster_1 {
+		graph [label="Repeating Structure",
+			pencolor=black,
+			style=dashed
+		];
+		subgraph num_1 {
+			graph [rank=same];
+			numSheep_tn[label=<numSheep_t<sub>n</sub>>];
+			sheepReproduce_tn[label=<sheepReproduce_t<sub>n</sub>>];
+			numWolves_tn[label=<numWolves_t<sub>n</sub>>];
+			wolvesReproduce_tn[label=<wolvesReproduce_t<sub>n</sub>>];
+			wolvesGainFromFood_tn[label=<wolvesGainFromFood_t<sub>n</sub>>];
+		}
+		subgraph num_2 {
+			graph [rank=same];
+			numSheep_tn1[label=<numSheep_t<sub>n+1</sub>>];
+			sheepReproduce_tn1[label=<sheepReproduce_t<sub>n+1</sub>>];
+			numWolves_tn1[label=<numWolves_t<sub>n+1</sub>>];
+			wolvesReproduce_tn1[label=<wolvesReproduce_t<sub>n+1</sub>>];
+			wolvesGainFromFood_tn1[label=<wolvesGainFromFood_t<sub>n+1</sub>>];
+		}
+	}
+	numSheep_t0 -> numSheep_tn;
+	numSheep_t0 -> numWolves_tn;
+	sheepReproduce_t0 -> numSheep_tn;
+	sheepReproduce_t0 -> sheepReproduce_tn;
+	wolvesGainFromFood_t0 -> numWolves_tn;
+	wolvesGainFromFood_t0 -> wolvesGainFromFood_tn;
+	numSheep_tn -> numSheep_tn1;
+	numSheep_tn -> numWolves_tn1;
+	sheepReproduce_tn -> numSheep_tn1;
+	sheepReproduce_tn -> sheepReproduce_tn1;
+	numWolves_t0 -> numSheep_tn;
+	numWolves_t0 -> numWolves_tn;
+	wolvesReproduce_t0 -> numWolves_tn;
+	wolvesReproduce_t0 -> wolvesReproduce_tn;
+	numWolves_tn -> numSheep_tn1;
+	numWolves_tn -> numWolves_tn1;
+	wolvesReproduce_tn -> numWolves_tn1;
+	wolvesReproduce_tn -> wolvesReproduce_tn1;
+	wolvesGainFromFood_tn -> numWolves_tn1;
+	wolvesGainFromFood_tn -> wolvesGainFromFood_tn1;
+}

@@ -63,17 +63,17 @@ def run(
     for i in range(step_count):
         grass, sheep, wolves = model.get_counts()
         
-        if sheep > 10000 or wolves > 10000:
-            break
+        # if sheep > 10000 or wolves > 10000:
+        #     break
             
         print(f"  step {i}")
         model.step()
         stats = model.datacollector.get_model_vars_dataframe()
         stats.to_csv(f"{infodir}/{statsfile}")
 
-for i in range(100):
+for i in range(10):
     print("RUN", i)
-    rundir = f"run-3-agent-{i}"
+    rundir = f"run-2-agent-300-steps-{i}"
     if not os.path.exists(f"runs/{rundir}"):
         os.mkdir(f"runs/{rundir}")
     
@@ -83,7 +83,7 @@ for i in range(100):
         sheep_reproduce=random(),
         wolf_reproduce=random(),
         wolf_gain_from_food=randint(1, 50),
-        grass=True,
+        grass=False,
         grass_regrowth_time=randint(1, 50),
         sheep_gain_from_food=randint(1, 10),
         step_count=300,

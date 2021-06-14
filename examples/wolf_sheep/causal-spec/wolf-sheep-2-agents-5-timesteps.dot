@@ -1,0 +1,110 @@
+digraph "" {
+	graph [newrank=True,
+		rankdir=LR
+	];
+	subgraph cluster_0 {
+		graph [label=t0,
+			pencolor=transparent
+		];
+		subgraph num_0 {
+			graph [rank=same];
+			numSheep_t0;
+			sheepReproduce_t0;
+			wolvesGainFromFood_t0;
+			numWolves_t0;
+			wolvesReproduce_t0;
+		}
+	}
+	subgraph cluster_2 {
+		graph [label=t2,
+			pencolor=black
+		];
+		subgraph num_2 {
+			graph [rank=same];
+			numSheep_t2;
+			sheepReproduce_t2;
+			numWolves_t2;
+			wolvesReproduce_t2;
+			wolvesGainFromFood_t2;
+		}
+	}
+	subgraph cluster_1 {
+		graph [label=t1,
+			pencolor=black
+		];
+		subgraph num_1 {
+			graph [rank=same];
+			numSheep_t1;
+			sheepReproduce_t1;
+			numWolves_t1;
+			wolvesReproduce_t1;
+			wolvesGainFromFood_t1;
+		}
+	}
+	subgraph cluster_3 {
+		graph [label=t3,
+			pencolor=black
+		];
+		subgraph num_3 {
+			graph [rank=same];
+			numSheep_t3;
+			sheepReproduce_t3;
+			numWolves_t3;
+			wolvesReproduce_t3;
+			wolvesGainFromFood_t3;
+		}
+	}
+	subgraph cluster_4 {
+		graph [label=t4,
+			pencolor=black
+		];
+		subgraph num_4 {
+			graph [rank=same];
+			numSheep_t4;
+			sheepReproduce_t4;
+			numWolves_t4;
+			wolvesReproduce_t4;
+			wolvesGainFromFood_t4;
+		}
+	}
+	numSheep_t0 -> numSheep_t1;
+	numSheep_t0 -> numWolves_t1;
+	sheepReproduce_t0 -> numSheep_t1;
+	sheepReproduce_t0 -> sheepReproduce_t1;
+	wolvesGainFromFood_t0 -> numWolves_t1;
+	wolvesGainFromFood_t0 -> wolvesGainFromFood_t1;
+	numSheep_t1 -> numSheep_t2;
+	numSheep_t1 -> numWolves_t2;
+	sheepReproduce_t1 -> numSheep_t2;
+	sheepReproduce_t1 -> sheepReproduce_t2;
+	numWolves_t0 -> numSheep_t1;
+	numWolves_t0 -> numWolves_t1;
+	wolvesReproduce_t0 -> numWolves_t1;
+	wolvesReproduce_t0 -> wolvesReproduce_t1;
+	numWolves_t1 -> numSheep_t2;
+	numWolves_t1 -> numWolves_t2;
+	wolvesReproduce_t1 -> numWolves_t2;
+	wolvesReproduce_t1 -> wolvesReproduce_t2;
+	wolvesGainFromFood_t1 -> numWolves_t2;
+	wolvesGainFromFood_t1 -> wolvesGainFromFood_t2;
+	numSheep_t2 -> numSheep_t3;
+	numSheep_t2 -> numWolves_t3;
+	sheepReproduce_t2 -> numSheep_t3;
+	sheepReproduce_t2 -> sheepReproduce_t3;
+	numWolves_t2 -> numSheep_t3;
+	numWolves_t2 -> numWolves_t3;
+	wolvesReproduce_t2 -> numWolves_t3;
+	wolvesReproduce_t2 -> wolvesReproduce_t3;
+	wolvesGainFromFood_t2 -> numWolves_t3;
+	wolvesGainFromFood_t2 -> wolvesGainFromFood_t3;
+	numSheep_t3 -> numSheep_t4;
+	numSheep_t3 -> numWolves_t4;
+	sheepReproduce_t3 -> numSheep_t4;
+	sheepReproduce_t3 -> sheepReproduce_t4;
+	numWolves_t3 -> numSheep_t4;
+	numWolves_t3 -> numWolves_t4;
+	wolvesReproduce_t3 -> numWolves_t4;
+	wolvesReproduce_t3 -> wolvesReproduce_t4;
+	wolvesGainFromFood_t3 -> numWolves_t4;
+	wolvesGainFromFood_t3 -> wolvesGainFromFood_t4;
+}
